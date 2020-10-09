@@ -1,0 +1,89 @@
+﻿<Project Sdk="MSBuild.Sdk.Extras/2.0.54">
+    <PropertyGroup>
+        <TargetFrameworks></TargetFrameworks>
+        <TargetFrameworks Condition=" '$(OS)' == 'Windows_NT' ">netstandard2.0;Xamarin.iOS10;MonoAndroid80;MonoAndroid81;MonoAndroid90;MonoAndroid10.0;uap10.0.18362</TargetFrameworks>
+        <TargetFrameworks Condition=" '$(OS)' != 'Windows_NT' ">netstandard2.0;Xamarin.iOS10;MonoAndroid80;MonoAndroid81;MonoAndroid90;MonoAndroid10.0</TargetFrameworks>
+        
+        <AssemblyName>Plugin.XamarinAppRating</AssemblyName>
+        <RootNamespace>Plugin.XamarinAppRating</RootNamespace>
+        <PackageId>Plugin.XamarinAppRating</PackageId>
+        
+        <Product>$(AssemblyName) ($(TargetFramework))</Product>
+        <AssemblyVersion>1.0.0</AssemblyVersion>
+        <AssemblyFileVersion>1.0.0.0</AssemblyFileVersion>
+        <Version>1.0.0</Version>
+        <PackageVersion>1.0.0</PackageVersion>
+        <PackOnBuild>true</PackOnBuild>
+        <NeutralLanguage>en</NeutralLanguage>
+        
+        <UseFullSemVerForNuGet>false</UseFullSemVerForNuGet>
+        <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+
+        <LangVersion>latest</LangVersion>
+        <DebugType>portable</DebugType>
+        
+        <PackageLicenseUrl>https://github.com/FabriBertani/Plugin.XamarinAppRating/blob/main/LICENSE</PackageLicenseUrl>
+        <PackageProjectUrl>https://github.com/FabriBertani/Plugin.XamarinAppRating</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/FabriBertani/Plugin.XamarinAppRating</RepositoryUrl>
+        <PackageTags>xamarin, windows, uwp, ios, android, toolkit, xamarin.forms, Plugin.XamarinAppRating, kit</PackageTags>
+        
+        <Title>Plugin.XamarinAppRating</Title>
+        <Summary>Plugin.XamarinAppRating: an easy way to quickly add store rating to your app.</Summary>
+        <Description>Plugin.XamarinAppRating: an easy way to quickly add store rating to your app.</Description>
+        
+        <Authors>Fabricio Bertani</Authors>
+        <Owners>Fabricio Bertani</Owners>
+        <Copyright>Copyright 2020</Copyright>
+        
+        <Configurations>Debug;Release</Configurations>
+
+        <DisableExtraReferences>true</DisableExtraReferences>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)'=='Debug' ">
+        <DebugSymbols>true</DebugSymbols>
+        <GenerateDocumentationFile>false</GenerateDocumentationFile>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)'=='Release' ">
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+        <PublishRepositoryUrl>true</PublishRepositoryUrl>        
+    </PropertyGroup>
+    
+    <ItemGroup>
+        <Compile Include="**\*.shared.cs" />
+    </ItemGroup>
+
+    <ItemGroup Condition=" $(TargetFramework.StartsWith('netstandard')) ">
+        <PackageReference Include="System.Numerics.Vectors" Version="4.5.0" />
+        <Compile Include="**\*.netstandard.cs" />
+    </ItemGroup>
+    
+    <ItemGroup Condition=" $(TargetFramework.StartsWith('uap10.0')) ">
+        <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform" Version="6.2.9" PrivateAssets="all" />
+        <Compile Include="**\*.uwp.cs" />
+        <SDKReference Include="WindowsMobile, Version=10.0.18362.0">
+            <Name>Windows Mobile Extensions for the UWP</Name>
+        </SDKReference>
+    </ItemGroup>
+    
+    <ItemGroup Condition=" $(TargetFramework.StartsWith('MonoAndroid')) ">
+        <Compile Include="**\*.android.cs" />
+        <PackageReference Include="System.Numerics.Vectors" Version="4.5.0" />
+        <Reference Include="System.Numerics" />
+    </ItemGroup>
+    
+    <ItemGroup Condition="$(TargetFramework.StartsWith('MonoAndroid')) And '$(TargetFramework)' != 'MonoAndroid10.0'">
+        <Compile Include="**\*.android.cs" />
+        <PackageReference Include="Xamarin.Android.Support.Compat" Version="28.0.0.3" />
+        <PackageReference Condition=" '$(OS)' == 'Windows_NT' And $(TargetFrameworkVersion.TrimStart('vV')) &lt; 9.0 And $(TargetFrameworkVersion.TrimStart('vV')) &lt; 10.0" Include="Xamarin.Android.Support.Core.Utils" Version="28.0.0.3" />
+        <PackageReference Condition=" '$(OS)' != 'Windows_NT' " Include="Xamarin.Android.Support.Core.Utils" Version="28.0.0.3" />
+    </ItemGroup>
+    
+    <ItemGroup Condition=" $(TargetFramework.StartsWith('Xamarin.iOS')) ">
+        <Compile Include="**\*.ios.cs" />
+        <PackageReference Include="System.Numerics.Vectors" Version="4.5.0" />
+        <Reference Include="System.Numerics" />
+    </ItemGroup>
+    
+</Project>
