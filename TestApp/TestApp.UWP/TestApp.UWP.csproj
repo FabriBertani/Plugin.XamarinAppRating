@@ -48,7 +48,7 @@
     <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
     <NoWarn>;2008</NoWarn>
     <DebugType>full</DebugType>
-    <PlatformTarget>x64</PlatformTarget>
+    <PlatformTarget>x86</PlatformTarget>
     <UseVSHostingProcess>false</UseVSHostingProcess>
     <ErrorReport>prompt</ErrorReport>
     <Prefer32Bit>true</Prefer32Bit>
@@ -148,6 +148,10 @@
     <PackageReference Include="Xamarin.Essentials" Version="1.5.3.2" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Plugin.XamarinAppRating\Plugin.XamarinAppRating.csproj">
+      <Project>{86ea2a64-9423-41af-a764-9c67b68989d2}</Project>
+      <Name>Plugin.XamarinAppRating</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TestApp\TestApp.csproj">
       <Project>{3FE865CF-95A3-4C96-B7AD-9CF630292B3A}</Project>
       <Name>TestApp</Name>
