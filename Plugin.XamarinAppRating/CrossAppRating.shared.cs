@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Threading.Tasks;
 
 namespace Plugin.XamarinAppRating
 {
@@ -9,6 +8,11 @@ namespace Plugin.XamarinAppRating
     public static class CrossAppRating
     {
         static Lazy<IAppRating> implementation = new Lazy<IAppRating>(() => CreateAppRating(), System.Threading.LazyThreadSafetyMode.PublicationOnly);
+
+        /// <summary>
+        /// Gets if the plugin is supported on the current platform.
+        /// </summary>
+        public static bool IsSupported => implementation.Value == null ? false : true;
 
         /// <summary>
         /// Current plugin implementation to use.

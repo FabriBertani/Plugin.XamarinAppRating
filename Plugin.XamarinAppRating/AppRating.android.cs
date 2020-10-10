@@ -56,7 +56,7 @@ namespace Plugin.XamarinAppRating
 
                     var alert = dialog.Create();
 
-                    if (Android.OS.Build.VERSION.SdkInt < Android.OS.BuildVersionCodes.M)
+                    if (Build.VERSION.SdkInt < BuildVersionCodes.M)
                         alert.Window.SetType(WindowManagerTypes.SystemAlert);
 
                     alert.Show();

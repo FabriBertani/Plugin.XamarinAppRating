@@ -1,7 +1,7 @@
 ﻿<Project Sdk="MSBuild.Sdk.Extras/2.0.54">
     <PropertyGroup>
         <TargetFrameworks></TargetFrameworks>
-        <TargetFrameworks Condition=" '$(OS)' == 'Windows_NT' ">netstandard2.0;Xamarin.iOS10;MonoAndroid80;MonoAndroid81;MonoAndroid90;MonoAndroid10.0;uap10.0.18362</TargetFrameworks>
+        <TargetFrameworks Condition=" '$(OS)' == 'Windows_NT' ">netstandard2.0;Xamarin.iOS10;MonoAndroid80;MonoAndroid81;MonoAndroid90;MonoAndroid10.0;uap10.0.16299</TargetFrameworks>
         <TargetFrameworks Condition=" '$(OS)' != 'Windows_NT' ">netstandard2.0;Xamarin.iOS10;MonoAndroid80;MonoAndroid81;MonoAndroid90;MonoAndroid10.0</TargetFrameworks>
         
         <AssemblyName>Plugin.XamarinAppRating</AssemblyName>
@@ -22,7 +22,7 @@
         <LangVersion>latest</LangVersion>
         <DebugType>portable</DebugType>
         
-        <PackageLicenseFile></PackageLicenseFile>
+        <PackageLicenseFile>LICENSE</PackageLicenseFile>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <PackageProjectUrl>https://github.com/FabriBertani/Plugin.XamarinAppRating</PackageProjectUrl>
         <RepositoryUrl>https://github.com/FabriBertani/Plugin.XamarinAppRating</RepositoryUrl>
@@ -55,26 +55,24 @@
     </PropertyGroup>
     
     <ItemGroup>
+        <None Include="..\LICENSE" PackagePath="" Pack="true" />
         <None Include="..\Assets\plugin.xamarinapprating_128x128.png" PackagePath="icon.png" Pack="true" />
         <Compile Include="**\*.shared.cs" />
     </ItemGroup>
 
     <ItemGroup Condition=" $(TargetFramework.StartsWith('netstandard')) ">
-        <PackageReference Include="System.Numerics.Vectors" Version="4.5.0" />
         <Compile Include="**\*.netstandard.cs" />
     </ItemGroup>
     
     <ItemGroup Condition=" $(TargetFramework.StartsWith('uap10.0')) ">
-        <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform" Version="6.2.9" PrivateAssets="all" />
         <Compile Include="**\*.uwp.cs" />
-        <SDKReference Include="WindowsMobile, Version=10.0.18362.0">
+        <SDKReference Include="WindowsMobile, Version=10.0.16299.0">
             <Name>Windows Mobile Extensions for the UWP</Name>
         </SDKReference>
     </ItemGroup>
     
     <ItemGroup Condition=" $(TargetFramework.StartsWith('MonoAndroid')) ">
         <Compile Include="**\*.android.cs" />
-        <PackageReference Include="System.Numerics.Vectors" Version="4.5.0" />
         <Reference Include="System.Numerics" />
     </ItemGroup>
     
@@ -87,7 +85,6 @@
     
     <ItemGroup Condition=" $(TargetFramework.StartsWith('Xamarin.iOS')) ">
         <Compile Include="**\*.ios.cs" />
-        <PackageReference Include="System.Numerics.Vectors" Version="4.5.0" />
         <Reference Include="System.Numerics" />
     </ItemGroup>
     
