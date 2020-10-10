@@ -22,18 +22,22 @@
         <LangVersion>latest</LangVersion>
         <DebugType>portable</DebugType>
         
-        <PackageLicenseUrl>https://github.com/FabriBertani/Plugin.XamarinAppRating/blob/main/LICENSE</PackageLicenseUrl>
+        <PackageLicenseFile></PackageLicenseFile>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <PackageProjectUrl>https://github.com/FabriBertani/Plugin.XamarinAppRating</PackageProjectUrl>
         <RepositoryUrl>https://github.com/FabriBertani/Plugin.XamarinAppRating</RepositoryUrl>
+        <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+        <RepositoryType>git</RepositoryType>
+        <PackageIcon>icon.png</PackageIcon>
         <PackageTags>xamarin, windows, uwp, ios, android, toolkit, xamarin.forms, Plugin.XamarinAppRating, kit</PackageTags>
         
         <Title>Plugin.XamarinAppRating</Title>
         <Summary>Plugin.XamarinAppRating: an easy way to quickly add store rating to your app.</Summary>
         <Description>Plugin.XamarinAppRating: an easy way to quickly add store rating to your app.</Description>
         
-        <Authors>Fabricio Bertani</Authors>
-        <Owners>Fabricio Bertani</Owners>
-        <Copyright>Copyright 2020</Copyright>
+        <Authors>FabriBertani</Authors>
+        <Owners>FabriBertani</Owners>
+        <Copyright>Copyright 2020 Fabricio Bertani</Copyright>
         
         <Configurations>Debug;Release</Configurations>
 
@@ -51,6 +55,7 @@
     </PropertyGroup>
     
     <ItemGroup>
+        <None Include="..\Assets\plugin.xamarinapprating_128x128.png" PackagePath="icon.png" Pack="true" />
         <Compile Include="**\*.shared.cs" />
     </ItemGroup>
 
