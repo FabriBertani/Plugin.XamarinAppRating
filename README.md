@@ -4,7 +4,7 @@
 Plugin.XamarinAppRating gives developers a fast and easy way to ask users to rate the app on the stores.
 
 ## Installation
-Plugin.XamarinAppRating is available via NuGet. Grab the latest NuGet package and install in your solution:
+Plugin.XamarinAppRating is available via NuGet, grab the latest package and install in your solution:
 
     Install-Package Plugin.XamarinAppRating
 
@@ -17,9 +17,9 @@ Plugin.XamarinAppRating is available via NuGet. Grab the latest NuGet package an
 |UWP|Build 18362+|
 
 ## API Usage
-Call **CrossAppRating.Current** from any of project to gain access to APIs.
+Call `CrossAppRating.Current` from any project to gain access to APIs.
 
-There is only one main method named **PerformPlatformRateAppAsync** but it have different implementations depending on platform.
+There is only one main method named `PerformPlatformRateAppAsync` but it has different implementations depending on platform.
 
 ### Android
 ```csharp
@@ -28,11 +28,11 @@ There is only one main method named **PerformPlatformRateAppAsync** but it have 
 /// </summary>
 public Task PerformPlatformRateAppAsync(string packageName = null)
 ```
-This method will open _Google Play_ store page of your current application on _Google Play_ app. Otherwise it will try to open the store page on browser.
+This method will open **_Google Play app_** on the store page of your current application. Otherwise it will try to open the store page on browser.
 
-The **packageName** property it's optional but you should provide it as an alternative to open the store in browser if main method fail.
+If neither main nor alternative methods work, it will display an alert announcing the error.
 
-If both main and alternative methods fail it will display an alert announcing the error.
+`packageName` property it's optional but you should provide it as an alternative to open the store in browser if main method fail.
 
 ### iOS
 ```csharp
@@ -41,13 +41,13 @@ If both main and alternative methods fail it will display an alert announcing th
 /// </summary>
 public Task PerformPlatformRateAppAsync(string packageName = null, string applicationId = null)
 ```
-The **packageName** property must be null for iOS only.
+If the device current OS version is 10.3 or newer, this method will raise an in-app review popup of your current application. Otherwise for older iOS versions, it will open the store page on browser.
 
-If device's current OS version is 10.3 or newer, this method would raise in-app review popup of your current application. Otherwise for older iOS versions, this method will open the store page on browser in order to users rate the app.
+If neither main nor alternative methods work, it will display an alert announcing the error.
 
-The **applicationId** is the StoreId of your iOS app. It's optional but you should provide it as an alternative to open the store in browser.
+`packageName` property must be null for iOS only.
 
-If both main and alternative methods fail it will display an alert announcing the error.
+`applicationId` property is the **_StoreId_** of your iOS app, it's optional but you should provide it as an alternative to open the store in browser.
 
 ### UWP
 ```csharp
@@ -56,16 +56,17 @@ If both main and alternative methods fail it will display an alert announcing th
 /// </summary>  
 public async Task PerformPlatformRateAppAsync(string packageName = null, string applicationId = null, string productId = null)
 ```
-The **packageName** and **applicationId** properties must be null for UWP only.
+`packageName` and `applicationId` properties must be null for UWP only.
 
-This method will open _Microsoft Store_ application with the page of your current app.
-
-The **productId** is the ProductId of your UWP app. It's **_Required_**</strong> to open the store page.</param>
+This method will open **_Microsoft Store application_** with the page of your current app.
 
 If method fail it will display an alert announcing the error.
 
+`productId` is the **_ProductId_** of your UWP app. It's **_Required_**</strong> to open the store page.</param>
+
+
 ## Usage
-**Warning** - You should be careful about how and when you ask users to rate your app, there may be penalties from stores. As an advice, use a counter on the app start and storage that counter, when the counter reachs certain number it shows a dialog to the users asking them if they want to rate the app first, if they decline restart the counter to ask them later, also leave the option to do it themselves.
+**Warning** - You should be careful about **how and when** you ask users to rate your app, there may be penalties from stores. As advice I recommend to use a counter on the app start and storage that counter, then when the counter reachs certain number, display a dialog asking to the users if they want to rate the app, if they decline the offer, reset the counter to ask them later, also leave the option to do it themselves.
 
 ```csharp
 public partial class MainPage : ContentPage
@@ -93,8 +94,12 @@ public partial class MainPage : ContentPage
                 return;
             }
 
-            // This method use Facebook™ store apps as example.
-            await CrossAppRating.Current.PerformPlatformRateAppAsync("com.facebook.katana", "id284882215", "9wzdncrf0083")
+            // For UWP this must be invoked on main thread in order to open the Windows Store app.
+            Device.BeginInvokeOnMainThread(async () =>
+            {
+                // This method use Facebook™ store apps as example.
+                await CrossAppRating.Current.PerformPlatformRateAppAsync("com.facebook.katana", "id284882215", "9wzdncrf0083")
+            });
 
             Preferences.Set("application_rated", true);
         }
