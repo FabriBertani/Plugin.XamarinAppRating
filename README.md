@@ -1,6 +1,5 @@
 # Plugin.XamarinAppRating
 [![NuGet](https://img.shields.io/nuget/v/Plugin.XamarinAppRating.svg?label=NuGet)](https://www.nuget.org/packages/Plugin.XamarinAppRating/)
-<a href="https://www.buymeacoffee.com/fabribertani" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-blue.png" alt="Buy Me A Coffee" style="height: 40px !important;width: 150px !important;" ></a>
 
 Plugin.XamarinAppRating gives developers a fast and easy way to ask users to rate the app on the stores.
 
