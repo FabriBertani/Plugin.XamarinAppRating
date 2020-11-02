@@ -10,7 +10,13 @@
         <Button
             VerticalOptions="CenterAndExpand"
             HorizontalOptions="FillAndExpand"
-            Text="RATE THIS APP"
-            Clicked="Button_Clicked" />
+            Margin="0, 15"
+            Text="OPEN IN APP RATING"
+            Clicked="InAppRating_Clicked" />
+        <Button
+            VerticalOptions="CenterAndExpand"
+            HorizontalOptions="FillAndExpand"
+            Text="OPEN RATING ON STORE OR BROWSER"
+            Clicked="AppRateOnStore_Clicked" />
     </StackLayout>
 </ContentPage>
