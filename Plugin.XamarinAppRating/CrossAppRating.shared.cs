@@ -12,7 +12,7 @@ namespace Plugin.XamarinAppRating
         /// <summary>
         /// Gets if the plugin is supported on the current platform.
         /// </summary>
-        public static bool IsSupported => implementation.Value == null ? false : true;
+        public static bool IsSupported => implementation.Value != null;
 
         /// <summary>
         /// Current plugin implementation to use.
@@ -23,10 +23,7 @@ namespace Plugin.XamarinAppRating
             {
                 IAppRating ret = implementation.Value;
 
-                if (ret == null)
-                    throw NotImplementedInReferenceAssembly();
-
-                return ret;
+                return ret ?? throw NotImplementedInReferenceAssembly();
             }
         }
 

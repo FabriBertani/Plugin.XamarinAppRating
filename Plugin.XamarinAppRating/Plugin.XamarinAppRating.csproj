@@ -1,18 +1,19 @@
 ﻿<Project Sdk="MSBuild.Sdk.Extras/2.0.54">
     <PropertyGroup>
         <TargetFrameworks></TargetFrameworks>
-        <TargetFrameworks Condition=" '$(OS)' == 'Windows_NT' ">netstandard2.0;Xamarin.iOS10;MonoAndroid80;MonoAndroid81;MonoAndroid90;MonoAndroid10.0;uap10.0.16299</TargetFrameworks>
-        <TargetFrameworks Condition=" '$(OS)' != 'Windows_NT' ">netstandard2.0;Xamarin.iOS10;MonoAndroid80;MonoAndroid81;MonoAndroid90;MonoAndroid10.0</TargetFrameworks>
+        <!--<TargetFrameworks Condition=" '$(OS)' != 'Windows_NT' ">netstandard2.0;Xamarin.iOS10;MonoAndroid80;MonoAndroid81;MonoAndroid90;MonoAndroid10.0</TargetFrameworks>-->
+        <TargetFrameworks>netstandard2.0;Xamarin.iOS10;MonoAndroid80;MonoAndroid81;MonoAndroid90;MonoAndroid10.0</TargetFrameworks>
+        <TargetFrameworks Condition=" '$(OS)' == 'Windows_NT' ">$(TargetFrameworks);uap10.0.17763;</TargetFrameworks>
         
         <AssemblyName>Plugin.XamarinAppRating</AssemblyName>
         <RootNamespace>Plugin.XamarinAppRating</RootNamespace>
         <PackageId>Plugin.XamarinAppRating</PackageId>
         
         <Product>$(AssemblyName) ($(TargetFramework))</Product>
-        <AssemblyVersion>1.0.0</AssemblyVersion>
-        <AssemblyFileVersion>1.0.0.0</AssemblyFileVersion>
-        <Version>1.0.0</Version>
-        <PackageVersion>1.0.0</PackageVersion>
+        <AssemblyVersion>1.0.1</AssemblyVersion>
+        <AssemblyFileVersion>1.0.1</AssemblyFileVersion>
+        <Version>1.0.1</Version>
+        <PackageVersion>1.0.1</PackageVersion>
         <PackOnBuild>true</PackOnBuild>
         <NeutralLanguage>en</NeutralLanguage>
         
@@ -23,7 +24,6 @@
         <DebugType>portable</DebugType>
         
         <PackageLicenseFile>LICENSE</PackageLicenseFile>
-        <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <PackageProjectUrl>https://github.com/FabriBertani/Plugin.XamarinAppRating</PackageProjectUrl>
         <RepositoryUrl>https://github.com/FabriBertani/Plugin.XamarinAppRating</RepositoryUrl>
         <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
@@ -48,10 +48,21 @@
         <DebugSymbols>true</DebugSymbols>
         <GenerateDocumentationFile>false</GenerateDocumentationFile>
     </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)'=='Debug' And '$(TargetFramework)' != 'MonoAndroid10.0' And '$(TargetFramework)' != 'MonoAndroid9.0' ">
+        <DebugSymbols>true</DebugSymbols>
+        <GenerateDocumentationFile>false</GenerateDocumentationFile>
+        <DefineConstants>MONODROID_80;MONODROID_81</DefineConstants>
+    </PropertyGroup>
     <PropertyGroup Condition=" '$(Configuration)'=='Release' ">
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
-        <PublishRepositoryUrl>true</PublishRepositoryUrl>        
+        <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)'=='Release' And '$(TargetFramework)' != 'MonoAndroid10.0' And '$(TargetFramework)' != 'MonoAndroid90' ">
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+        <PublishRepositoryUrl>true</PublishRepositoryUrl>
+        <DefineConstants>MONODROID_80;MONODROID_81</DefineConstants>
     </PropertyGroup>
     
     <ItemGroup>
@@ -61,31 +72,23 @@
     </ItemGroup>
 
     <ItemGroup Condition=" $(TargetFramework.StartsWith('netstandard')) ">
-        <Compile Include="**\*.netstandard.cs" />
     </ItemGroup>
     
     <ItemGroup Condition=" $(TargetFramework.StartsWith('uap10.0')) ">
         <Compile Include="**\*.uwp.cs" />
-        <SDKReference Include="WindowsMobile, Version=10.0.16299.0">
+        <SDKReference Include="WindowsMobile, Version=10.0.17763.0">
             <Name>Windows Mobile Extensions for the UWP</Name>
         </SDKReference>
     </ItemGroup>
     
     <ItemGroup Condition=" $(TargetFramework.StartsWith('MonoAndroid')) ">
         <Compile Include="**\*.android.cs" />
-        <Reference Include="System.Numerics" />
-    </ItemGroup>
-    
-    <ItemGroup Condition="$(TargetFramework.StartsWith('MonoAndroid')) And '$(TargetFramework)' != 'MonoAndroid10.0'">
-        <Compile Include="**\*.android.cs" />
-        <PackageReference Include="Xamarin.Android.Support.Compat" Version="28.0.0.3" />
-        <PackageReference Condition=" '$(OS)' == 'Windows_NT' And $(TargetFrameworkVersion.TrimStart('vV')) &lt; 9.0 And $(TargetFrameworkVersion.TrimStart('vV')) &lt; 10.0" Include="Xamarin.Android.Support.Core.Utils" Version="28.0.0.3" />
-        <PackageReference Condition=" '$(OS)' != 'Windows_NT' " Include="Xamarin.Android.Support.Core.Utils" Version="28.0.0.3" />
+        <PackageReference Condition="$(TargetFramework.StartsWith('MonoAndroid')) And '$(TargetFramework)' != 'MonoAndroid80' And '$(TargetFramework)' != 'MonoAndroid81'" Include="PlayCore" Version="1.8.0" />
+        <PackageReference Include="Xamarin.Essentials" Version="1.5.3.2" />
     </ItemGroup>
     
     <ItemGroup Condition=" $(TargetFramework.StartsWith('Xamarin.iOS')) ">
         <Compile Include="**\*.ios.cs" />
-        <Reference Include="System.Numerics" />
     </ItemGroup>
     
 </Project>
