@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="@android:color/white">
+    <Button
+        android:id="@+id/rate_on_store_btn"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/abc_action_button_min_height_material"
+        android:background="@color/colorAccent"
+        android:textStyle="bold"
+        android:textColor="@android:color/white"
+        android:textSize="15sp"
+        android:textAllCaps="true"
+        android:text="Open Rating on store or browser"
+        android:clickable="true"
+        android:focusable="true"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp" />
+</LinearLayout>
