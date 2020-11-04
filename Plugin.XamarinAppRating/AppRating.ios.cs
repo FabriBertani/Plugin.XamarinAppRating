@@ -40,8 +40,7 @@ namespace Plugin.XamarinAppRating
 
             if (!string.IsNullOrEmpty(applicationId))
             {
-                var storeUrl = $"itms-apps://itunes.apple.com/app/{applicationId}";
-                var url = storeUrl + "?action=write-review";
+                var url = $"itms-apps://itunes.apple.com/app/{applicationId}?action=write-review";
 
                 try
                 {

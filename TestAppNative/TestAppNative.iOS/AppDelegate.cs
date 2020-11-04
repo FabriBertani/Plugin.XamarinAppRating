@@ -3,38 +3,28 @@ using UIKit;
 
 namespace TestAppNative.iOS
 {
-    [Register(nameof(AppDelegate))]
-    public class AppDelegate : UIApplicationDelegate
-    {
-        public override UIWindow Window { get; set; }
+    [Register (nameof(AppDelegate))]
+    public class AppDelegate : UIResponder, IUIApplicationDelegate {
+    
+        [Export("window")]
+        public UIWindow Window { get; set; }
 
-        public override bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
+        [Export ("application:didFinishLaunchingWithOptions:")]
+        public bool FinishedLaunching (UIApplication application, NSDictionary launchOptions)
         {
-            Window = new UIWindow(UIScreen.MainScreen.Bounds);
-            Window.RootViewController = new UIViewController();
-
-            Window.MakeKeyAndVisible();
-
             return true;
         }
 
-        public override void OnResignActivation(UIApplication application)
+        // UISceneSession Lifecycle
+
+        [Export ("application:configurationForConnectingSceneSession:options:")]
+        public UISceneConfiguration GetConfiguration (UIApplication application, UISceneSession connectingSceneSession, UISceneConnectionOptions options)
         {
+            return UISceneConfiguration.Create ("Default Configuration", connectingSceneSession.Role);
         }
 
-        public override void DidEnterBackground(UIApplication application)
-        {
-        }
-
-        public override void WillEnterForeground(UIApplication application)
-        {
-        }
-
-        public override void OnActivated(UIApplication application)
-        {
-        }
-
-        public override void WillTerminate(UIApplication application)
+        [Export ("application:didDiscardSceneSessions:")]
+        public void DidDiscardSceneSessions (UIApplication application, NSSet<UISceneSession> sceneSessions)
         {
         }
     }
