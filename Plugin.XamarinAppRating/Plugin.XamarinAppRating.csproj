@@ -1,7 +1,5 @@
 ﻿<Project Sdk="MSBuild.Sdk.Extras/2.0.54">
     <PropertyGroup>
-        <TargetFrameworks></TargetFrameworks>
-        <!--<TargetFrameworks Condition=" '$(OS)' != 'Windows_NT' ">netstandard2.0;Xamarin.iOS10;MonoAndroid80;MonoAndroid81;MonoAndroid90;MonoAndroid10.0</TargetFrameworks>-->
         <TargetFrameworks>netstandard2.0;Xamarin.iOS10;MonoAndroid80;MonoAndroid81;MonoAndroid90;MonoAndroid10.0</TargetFrameworks>
         <TargetFrameworks Condition=" '$(OS)' == 'Windows_NT' ">$(TargetFrameworks);uap10.0.17763;</TargetFrameworks>
         
@@ -10,10 +8,10 @@
         <PackageId>Plugin.XamarinAppRating</PackageId>
         
         <Product>$(AssemblyName) ($(TargetFramework))</Product>
-        <AssemblyVersion>1.0.1</AssemblyVersion>
-        <AssemblyFileVersion>1.0.1</AssemblyFileVersion>
-        <Version>1.0.1</Version>
-        <PackageVersion>1.0.1</PackageVersion>
+        <AssemblyVersion>1.1.0</AssemblyVersion>
+        <AssemblyFileVersion>1.1.0</AssemblyFileVersion>
+        <Version>1.1.0</Version>
+        <PackageVersion>1.1.0</PackageVersion>
         <PackOnBuild>true</PackOnBuild>
         <NeutralLanguage>en</NeutralLanguage>
         
@@ -26,6 +24,7 @@
         <PackageLicenseFile>LICENSE</PackageLicenseFile>
         <PackageProjectUrl>https://github.com/FabriBertani/Plugin.XamarinAppRating</PackageProjectUrl>
         <RepositoryUrl>https://github.com/FabriBertani/Plugin.XamarinAppRating</RepositoryUrl>
+        <PackageReleaseNotes>https://github.com/FabriBertani/Plugin.XamarinAppRating/blob/main/CHANGELOG.md</PackageReleaseNotes>
         <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
         <RepositoryType>git</RepositoryType>
         <PackageIcon>icon.png</PackageIcon>
