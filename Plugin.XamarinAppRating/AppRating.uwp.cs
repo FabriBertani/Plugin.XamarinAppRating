@@ -33,7 +33,7 @@ namespace Plugin.XamarinAppRating
 
                         break;
                     case StoreRateAndReviewStatus.CanceledByUser:
-                        await ShowErrorMessage("ERROR", "In-app rating action canceled by user.");
+                        await ShowErrorMessage("ACTION CANCELED", "In-app rating action canceled by user.");
 
                         break;
                     case StoreRateAndReviewStatus.NetworkError:
