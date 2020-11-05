@@ -1,5 +1,8 @@
 # Changelog
 ## 1.1.0 (11/04/2020)
+
+[Full Changelog](https://github.com/FabriBertani/Plugin.XamarinAppRating/compare/v1.0.1...v1.1.0)
+
 **Breaking changes:**
 - `PerformPlatformRateAppAsync()` method was marked as obsolete and it will be removed on further versions.
 - Removed `netstandard` implementation.
