@@ -14,95 +14,180 @@ Plugin.XamarinAppRating is available via NuGet, grab the latest package and inst
 |-------------------|:------------------:|
 |Xamarin.Android|API 25+|
 |Xamarin.iOS|iOS 9.0+|
-|UWP|Build 18362+|
+|UWP|Build 17763+|
+
+## Version 1.1.0
+> :warning: `PerformPlatformRateAppAsync` method **was marked obsolte** on `v1.1.0` and it will be removed on further versions, please consider use new methods `PerformInAppRateAsync` or `PerformRatingOnStoreAsync`.
+
+### New Features
+- Added support to perform rating in-app by using new method `PerformInAppRateAsync()` (available on both native projects and Xamarin.Forms).
+- Added new method to perform rating opening the platform store app or store page on platform browser, by using new method `PerformRatingOnStoreAsync()` with individual named arguments for each platform (available on both native projects and Xamarin.Forms).
 
 ## API Usage
 Call `CrossAppRating.Current` from any project to gain access to APIs.
 
-There is only one main method named `PerformPlatformRateAppAsync` but it has different implementations depending on platform.
+There are two main methods, `PerformInAppRateAsync` and `PerformRatingOnStoreAsync`.
 
 ### Android
 ```csharp
 /// <summary>
-/// Open app rating system for Android
+/// Perform rating without leaving the app.
 /// </summary>
-public Task PerformPlatformRateAppAsync(string packageName = null)
+public Task PerformInAppRateAsync();
+```
+This method will open in-app review dialog, using the `packageName` declared on the `AndroidManifest` file.
+
+> :warning: This method it's only available for API 28 and above, if your target version it's lower it will display an alert announcing that it's not supported.
+
+If your Target Android version is 27 or below please consider use the next method.
+
+```csharp
+/// <summary>
+/// Perform rating on the current OS store app or open the store page on browser.
+/// </summary>
+public Task PerformRatingOnStoreAsync()
 ```
 This method will open **_Google Play app_** on the store page of your current application. Otherwise it will try to open the store page on browser.
 
-If neither main nor alternative methods work, it will display an alert announcing the error.
+If neither store page nor browser store page works, it will display an alert announcing the error.
 
-`packageName` property it's optional but you should provide it as an alternative to open the store in browser if main method fail.
+`packageName` **must** be provided as named argument to open the store page on store app or browser.
+
+#### Example
+```csharp
+if (CrossAppRating.IsSupported)
+    await CrossAppRating.Current.PerformRatingOnStoreAsync(packageName: "com.facebook.katana");
+```
 
 ### iOS
 ```csharp
 /// <summary>
-/// Open app rating system for iOS
+/// Perform rating without leaving the app.
 /// </summary>
-public Task PerformPlatformRateAppAsync(string packageName = null, string applicationId = null)
+public Task PerformInAppRateAsync();
 ```
-If the device current OS version is 10.3 or newer, this method will raise an in-app review popup of your current application. Otherwise for older iOS versions, it will open the store page on browser.
+If the device current OS version is 10.3 or newer, this method will raise an in-app review popup of your current application, otherwise it will display an alert announcing that it's not supported.
 
-If neither main nor alternative methods work, it will display an alert announcing the error.
+```csharp
+/// <summary>
+/// Perform rating on the current OS store app or open the store page on browser.
+/// </summary>
+public Task PerformRatingOnStoreAsync()
+```
+This method will open **App Store app** on the store page of your current application. Otherwise it will try to open the store page on browser.
 
-`packageName` property must be null for iOS only.
+If the method fails, it will display an alert announcing the error.
 
-`applicationId` property is the **_StoreId_** of your iOS app, it's optional but you should provide it as an alternative to open the store in browser.
+`applicationId` property is the **_StoreId_** of your iOS app and it **must** be provided as named argument to open the store page on store app or browser.
+
+#### Example
+```csharp
+if (CrossAppRating.IsSupported)
+    await CrossAppRating.Current.PerformRatingOnStoreAsync(applicationId: "id284882215");
+```
 
 ### UWP
 ```csharp
 /// <summary>
-/// Open app rating system for UWP
-/// </summary>  
-public async Task PerformPlatformRateAppAsync(string packageName = null, string applicationId = null, string productId = null)
+/// Perform rating without leaving the app.
+/// </summary>
+public Task PerformInAppRateAsync();
 ```
-`packageName` and `applicationId` properties must be null for UWP only.
+If the target version build is 17763 or above , this method will raise an in-app review dialog of your current application, otherwise it will display an alert announcing that it's not supported.
 
+```csharp
+/// <summary>
+/// Perform rating on the current OS store app or open the store page on browser.
+/// </summary>
+public Task PerformRatingOnStoreAsync()
+```
 This method will open **_Microsoft Store application_** with the page of your current app.
 
 If method fail it will display an alert announcing the error.
 
-`productId` is the **_ProductId_** of your UWP app. It's **_Required_**</strong> to open the store page.</param>
+`productId` is the **_ProductId_** of your UWP app and it **must** be provided as named argument to open the store page app.
 
+### Example
+```csharp
+if (CrossAppRating.IsSupported)
+    await CrossAppRating.Current.PerformRatingOnStoreAsync(productId: "9wzdncrf0083");
+```
 
 ## Usage
-**Warning** - You should be careful about **how and when** you ask users to rate your app, there may be penalties from stores. As advice I recommend to use a counter on the app start and storage that counter, then when the counter reachs certain number, display a dialog asking to the users if they want to rate the app, if they decline the offer, reset the counter to ask them later, also leave the option to do it themselves.
+> :warning: **Warning** - You should be careful about **how and when** you ask users to rate your app, there may be penalties from stores. As advice I recommend to use a counter on the app start and storage that count, then when the counter reachs certain number, display a dialog asking to the users if they want to rate the app, if they decline the offer, reset the counter to ask them later, also leave the option to do it themselves.
 
 ```csharp
 public partial class MainPage : ContentPage
 {
+    private const string androidPackageName = "com.facebook.katana";
+    private const string iOSApplicationId = "id284882215";
+    private const string uwpProductId = "9wzdncrf0083";
+
     public MainPage()
     {
         InitializeComponent();
 
-        var appAlreadyRated = Preferences.Get("application_rated");
-
-        if (!appAlreadyRated)
-          Task.Run(() => CheckAppCountAndRate());
+        if (!Preferences.Get("application_rated", false))
+            Task.Run(() => CheckAppCountAndRate());
     }
 
     private async Task CheckAppCountAndRate()
     {
-        var applicationCount = Preferences.Get("application_counter");
-
-        if (applicationCount >= 5)
+        if (Preferences.Get("application_counter", 0) >= 5)
         {
-            if (!await DisplayAlert ("Rate this App!", "Are you enjoying the app so far? Would you like to leave a review in the store?", "Yes", "No");)
+            if (!await DisplayAlert("Rate this App!", "Are you enjoying the app so far? Would you like to leave a review in the store?", "Yes", "No"))
             {
                 Preferences.Set("application_counter", 0);
 
                 return;
             }
 
-            // For UWP this must be invoked on main thread in order to open the Windows Store app.
+            await RateApplicationInApp();
+        }
+    }
+
+    private Task RateApplicationInApp()
+    {
+        if (CrossAppRating.IsSupported)
+        {
             Device.BeginInvokeOnMainThread(async () =>
             {
-                // This method use Facebook™ store apps as example.
-                await CrossAppRating.Current.PerformPlatformRateAppAsync("com.facebook.katana", "id284882215", "9wzdncrf0083")
+                // This method will simulate Facebook™ app to in-app rating as example.
+                await CrossAppRating.Current.PerformInAppRateAsync();
             });
 
             Preferences.Set("application_rated", true);
         }
+
+        return Task.CompletedTask;
+    }
+
+    private Task RateApplicationOnStore()
+    {
+        if (CrossAppRating.IsSupported)
+        {
+            Device.BeginInvokeOnMainThread(async () =>
+            {
+                // This method use Facebook™'s store apps as example.
+                await CrossAppRating.Current.PerformRatingOnStoreAsync(packageName: androidPackageName, applicationId: iOSApplicationId, productId: uwpProductId);
+            });
+
+            Preferences.Set("application_rated", true);
+        }
+
+        return Task.CompletedTask;
+    }
+
+    private void InAppRating_Clicked(object sender, EventArgs e)
+    {
+        if (!Preferences.Get("application_rated", false))
+            Task.Run(() => RateApplicationInApp());
+    }
+
+    private void AppRateOnStore_Clicked(object sender, EventArgs e)
+    {
+        if (!Preferences.Get("application_rated", false))
+            Task.Run(() => RateApplicationOnStore());
     }
 }
 ```
