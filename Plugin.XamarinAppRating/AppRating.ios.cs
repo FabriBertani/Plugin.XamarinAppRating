@@ -24,6 +24,12 @@ namespace Plugin.XamarinAppRating
 
                 tcs.SetResult(true);
             }
+            else
+            {
+                DisplayErrorAlert("Your current iOS version doesn't support in-app rating.");
+
+                tcs.SetResult(false);
+            }
 
             return tcs.Task;
         }
