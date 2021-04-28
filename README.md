@@ -23,7 +23,7 @@ Plugin.XamarinAppRating is available via NuGet, grab the latest package and inst
 
 
 ### New Features
-- Added support to macOS and tvOS!
+- Added support to macOS and tvOS :exclamation:
 - Merged android support into a simple solution to avoid OS version limitations.
 
 ## API Usage
