@@ -2,7 +2,8 @@
 <ContentPage
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    x:Class="TestApp.MainPage">
+    x:Class="TestApp.MainPage"
+    BackgroundColor="White">
     <StackLayout
         HorizontalOptions="CenterAndExpand"
         VerticalOptions="CenterAndExpand"
@@ -11,11 +12,16 @@
             VerticalOptions="CenterAndExpand"
             HorizontalOptions="FillAndExpand"
             Margin="0, 15"
+            BackgroundColor="Blue"
+            TextColor="White"
             Text="OPEN IN APP RATING"
             Clicked="InAppRating_Clicked" />
         <Button
             VerticalOptions="CenterAndExpand"
             HorizontalOptions="FillAndExpand"
+            Padding="10, 0"
+            BackgroundColor="CornflowerBlue"
+            TextColor="White"
             Text="OPEN RATING ON STORE OR BROWSER"
             Clicked="AppRateOnStore_Clicked" />
     </StackLayout>
