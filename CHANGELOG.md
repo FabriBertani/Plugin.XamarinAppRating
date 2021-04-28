@@ -1,6 +1,6 @@
 # Changelog
 ## 1.2.0 (04/28/2021)
-[Full Changelog](https://github.com/FabriBertani/Plugin.XamarinAppRating/compare/v1.1.0...1.2.0)
+[Full Changelog](https://github.com/FabriBertani/Plugin.XamarinAppRating/compare/v1.1.0...v1.2.0)
 
 **Breaking changes:**
 - `PerformPlatformRateAppAsync()` was fully removed.
