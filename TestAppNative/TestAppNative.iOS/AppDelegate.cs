@@ -4,7 +4,8 @@ using UIKit;
 namespace TestAppNative.iOS
 {
     [Register (nameof(AppDelegate))]
-    public class AppDelegate : UIResponder, IUIApplicationDelegate {
+    public class AppDelegate : UIResponder, IUIApplicationDelegate
+    {
     
         [Export("window")]
         public UIWindow Window { get; set; }
