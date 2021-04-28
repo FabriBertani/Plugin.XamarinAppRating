@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -19,7 +19,7 @@
     <AndroidResgenClass>Resource</AndroidResgenClass>
     <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
     <AndroidUseLatestPlatformSdk>false</AndroidUseLatestPlatformSdk>
-    <TargetFrameworkVersion>v9.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v11.0</TargetFrameworkVersion>
     <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
     <MonoAndroidResourcePrefix>Resources</MonoAndroidResourcePrefix>
     <MonoAndroidAssetsPrefix>Assets</MonoAndroidAssetsPrefix>
@@ -105,13 +105,13 @@
     <Folder Include="Resources\drawable\" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Xamarin.Android.Support.Core.Utils" Version="28.0.0.3" />
-    <PackageReference Include="Xamarin.Android.Support.Annotations" Version="28.0.0.3" />
-    <PackageReference Include="Xamarin.Android.Support.Collections" Version="28.0.0.3" />
-    <PackageReference Include="Xamarin.Android.Support.Design" Version="28.0.0.3" />
-    <PackageReference Include="Xamarin.Android.Support.CustomTabs" Version="28.0.0.3" />
-    <PackageReference Include="Xamarin.Essentials" Version="1.5.3.2" />
-  </ItemGroup>
+    <PackageReference Include="Xamarin.AndroidX.Legacy.Support.Core.Utils" Version="1.0.0-preview01" />
+    <PackageReference Include="Xamarin.AndroidX.Annotation" Version="1.0.2-preview01" />
+    <PackageReference Include="Xamarin.AndroidX.Collection" Version="1.0.0-preview01" />
+    <PackageReference Include="Xamarin.Google.Android.Material" Version="1.0.0-preview01" />
+    <PackageReference Include="Xamarin.AndroidX.Browser" Version="1.0.0-preview01" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.6.1" />
+  <PackageReference Include="Xamarin.AndroidX.Migration" Version="1.0.0-preview03" /></ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Plugin.XamarinAppRating\Plugin.XamarinAppRating.csproj">
       <Project>{86ea2a64-9423-41af-a764-9c67b68989d2}</Project>
