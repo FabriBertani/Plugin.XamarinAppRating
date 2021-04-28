@@ -1,5 +1,18 @@
 # Changelog
-## 1.1.0 (11/04/2020)
+## 1.2.0 (04/28/2021)
+[Full Changelog](https://github.com/FabriBertani/Plugin.XamarinAppRating/compare/v1.1.0...v1.2.0)
+
+**Breaking changes:**
+- `PerformPlatformRateAppAsync()` was fully removed.
+
+**Implemented enhancements:**
+- Added support for macOS and tvOS.
+- Merged Android methods for different OS versions into a single method.
+- Updated TestApp sample to Xamarin.Forms 5.0.0.2012
+- Added macOS to Xamarin.Forms sample project.
+- Added macOS to Xamarin native sample project.
+
+## 1.1.0 (04/11/2020)
 
 [Full Changelog](https://github.com/FabriBertani/Plugin.XamarinAppRating/compare/v1.0.1...v1.1.0)
 

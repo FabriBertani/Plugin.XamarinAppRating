@@ -14,14 +14,17 @@ Plugin.XamarinAppRating is available via NuGet, grab the latest package and inst
 |-------------------|:------------------:|
 |Xamarin.Android|API 25+|
 |Xamarin.iOS|iOS 9.0+|
+|Xamarin.tvOS|All|
+|Xamarin.macOS|All|
 |UWP|Build 17763+|
 
-## Version 1.1.0
-> :warning: `PerformPlatformRateAppAsync` method **was marked obsolte** on `v1.1.0` and it will be removed on further versions, please consider use new methods `PerformInAppRateAsync` or `PerformRatingOnStoreAsync`.
+## Version 1.2.0
+> :warning: `PerformPlatformRateAppAsync` was removed, please use new methods `PerformInAppRateAsync` or `PerformRatingOnStoreAsync`.
+
 
 ### New Features
-- Added support to perform rating in-app by using new method `PerformInAppRateAsync()` (available on both native projects and Xamarin.Forms).
-- Added new method to perform rating opening the platform store app or store page on platform browser, by using new method `PerformRatingOnStoreAsync()` with individual named arguments for each platform (available on both native projects and Xamarin.Forms).
+- Added support to macOS and tvOS!
+- Merged android support into a simple solution to avoid OS version limitations.
 
 ## API Usage
 Call `CrossAppRating.Current` from any project to gain access to APIs.
@@ -35,11 +38,7 @@ There are two main methods, `PerformInAppRateAsync` and `PerformRatingOnStoreAsy
 /// </summary>
 public Task PerformInAppRateAsync();
 ```
-This method will open in-app review dialog, using the `packageName` declared on the `AndroidManifest` file.
-
-> :warning: This method it's only available for API 28 and above, if your target version it's lower it will display an alert announcing that it's not supported.
-
-If your Target Android version is 27 or below please consider use the next method.
+> This method will open in-app review dialog, using the `packageName` declared on the `AndroidManifest` file.
 
 ```csharp
 /// <summary>
@@ -47,7 +46,7 @@ If your Target Android version is 27 or below please consider use the next metho
 /// </summary>
 public Task PerformRatingOnStoreAsync()
 ```
-This method will open **_Google Play app_** on the store page of your current application. Otherwise it will try to open the store page on browser.
+> This method will open **_Google Play app_** on the store page of your current application. Otherwise it will try to open the store page on browser.
 
 If neither store page nor browser store page works, it will display an alert announcing the error.
 
@@ -59,14 +58,14 @@ if (CrossAppRating.IsSupported)
     await CrossAppRating.Current.PerformRatingOnStoreAsync(packageName: "com.facebook.katana");
 ```
 
-### iOS
+### iOS / macOS / tvOS
 ```csharp
 /// <summary>
 /// Perform rating without leaving the app.
 /// </summary>
 public Task PerformInAppRateAsync();
 ```
-If the device current OS version is 10.3 or newer, this method will raise an in-app review popup of your current application, otherwise it will display an alert announcing that it's not supported.
+> **For iOS**: if the device current OS version is 10.3 or newer, this method will raise an in-app review popup of your current application, otherwise it will display an alert announcing that it's not supported.
 
 ```csharp
 /// <summary>
@@ -74,11 +73,11 @@ If the device current OS version is 10.3 or newer, this method will raise an in-
 /// </summary>
 public Task PerformRatingOnStoreAsync()
 ```
-This method will open **App Store app** on the store page of your current application. Otherwise it will try to open the store page on browser.
+> This method will open **App Store app** on the store page of your current application. Otherwise it will try to open the store page on browser.
 
 If the method fails, it will display an alert announcing the error.
 
-`applicationId` property is the **_StoreId_** of your iOS app and it **must** be provided as named argument to open the store page on store app or browser.
+`applicationId` property is the **_StoreId_** of your app and it **must** be provided as named argument to open the store page on store app or browser.
 
 #### Example
 ```csharp
@@ -93,7 +92,8 @@ if (CrossAppRating.IsSupported)
 /// </summary>
 public Task PerformInAppRateAsync();
 ```
-If the target version build is 17763 or above , this method will raise an in-app review dialog of your current application, otherwise it will display an alert announcing that it's not supported.
+> **If the target version build is 17763 or above**, this method will raise an in-app review dialog of your current application, otherwise it will display an alert announcing that it's not supported.
+
 
 ```csharp
 /// <summary>
@@ -101,7 +101,7 @@ If the target version build is 17763 or above , this method will raise an in-app
 /// </summary>
 public Task PerformRatingOnStoreAsync()
 ```
-This method will open **_Microsoft Store application_** with the page of your current app.
+> This method will open **_Microsoft Store application_** with the page of your current app.
 
 If method fail it will display an alert announcing the error.
 
@@ -191,6 +191,9 @@ public partial class MainPage : ContentPage
     }
 }
 ```
+
+## Samples
+Take a look into the [TestApp sample](https://github.com/FabriBertani/Plugin.XamarinAppRating/tree/main/TestApp) for **Xamarin.Forms** or [TestAppNative sample](https://github.com/FabriBertani/Plugin.XamarinAppRating/tree/main/TestAppNative) for **Xamarin native** fully detailed implementation of this plugin.
 
 ## Contributions
 Please, feel free to open an [Issue](https://github.com/FabriBertani/Plugin.XamarinAppRating/issues) if you found any bugs or submit a PR.

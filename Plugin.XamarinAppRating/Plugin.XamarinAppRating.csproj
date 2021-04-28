@@ -9,10 +9,10 @@
         <PackageId>Plugin.XamarinAppRating</PackageId>
         
         <Product>$(AssemblyName) ($(TargetFramework))</Product>
-        <AssemblyVersion>1.1.0</AssemblyVersion>
-        <AssemblyFileVersion>1.1.0</AssemblyFileVersion>
-        <Version>1.1.0</Version>
-        <PackageVersion>1.1.0</PackageVersion>
+        <AssemblyVersion>1.2.0</AssemblyVersion>
+        <AssemblyFileVersion>1.2.0</AssemblyFileVersion>
+        <Version>1.2.0</Version>
+        <PackageVersion>1.2.0</PackageVersion>
         <PackOnBuild>true</PackOnBuild>
         <NeutralLanguage>en</NeutralLanguage>
         
@@ -37,7 +37,7 @@
         
         <Authors>FabriBertani</Authors>
         <Owners>FabriBertani</Owners>
-        <Copyright>Copyright 2020 Fabricio Bertani</Copyright>
+        <Copyright>Copyright 2021 Fabricio Bertani</Copyright>
         
         <Configurations>Debug;Release</Configurations>
 
