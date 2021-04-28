@@ -69,33 +69,6 @@ namespace Plugin.XamarinAppRating
             }
         }
 
-        [Obsolete("Please use PerformInAppRateAsync or PerformRatingOnStoreAsync instead.")]
-        public async Task PerformPlatformRateAppAsync(string packageName = null, string applicationId = null, string productId = null)
-        {
-            // This implementation will be left until next version
-            // in which it will be finally removed
-
-            await this.PerformRatingOnStoreAsync(productId: productId);
-        }
-
-        [Obsolete("Please use PerformInAppRateAsync or PerformRatingOnStoreAsync instead.")]
-        public Task PerformPlatformRateAppAsync()
-        {
-            return Task.CompletedTask;
-        }
-
-        [Obsolete("Please use PerformInAppRateAsync or PerformRatingOnStoreAsync instead.")]
-        public Task PerformPlatformRateAppAsync(string packageName = null)
-        {
-            return Task.CompletedTask;
-        }
-
-        [Obsolete("Please use PerformInAppRateAsync or PerformRatingOnStoreAsync instead.")]
-        public Task PerformPlatformRateAppAsync(string packageName = null, string applicationId = null)
-        {
-            return Task.CompletedTask;
-        }
-
         private async Task ShowErrorMessage(string title, string message)
         {
             ContentDialog alert = new ContentDialog

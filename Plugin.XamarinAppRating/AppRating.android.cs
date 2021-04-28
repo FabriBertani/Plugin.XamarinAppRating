@@ -107,32 +107,6 @@ namespace Plugin.XamarinAppRating
             return tcs.Task;
         }
 
-        [Obsolete("Please use PerformInAppRateAsync or PerformRatingOnStoreAsync instead.")]
-        public async Task PerformPlatformRateAppAsync(string packageName)
-        {
-            // This implementation will be left until next version
-            // in which it will be finally removed
-
-            await PerformRatingOnStoreAsync(packageName: packageName);
-        }
-
-        [Obsolete("Please use PerformInAppRateAsync or PerformRatingOnStoreAsync instead.")]
-        public Task PerformPlatformRateAppAsync()
-        {
-            return Task.CompletedTask;
-        }
-
-        [Obsolete("Please use PerformInAppRateAsync or PerformRatingOnStoreAsync instead.")]
-        public Task PerformPlatformRateAppAsync(string packageName = null, string applicationId = null)
-        {
-            return Task.CompletedTask;
-        }
-
-        [Obsolete("Please use PerformInAppRateAsync or PerformRatingOnStoreAsync instead.")]
-        public Task PerformPlatformRateAppAsync(string packageName = null, string applicationId = null, string productId = null)
-        {
-            return Task.CompletedTask;
-        }
         public void OnComplete(Com.Google.Android.Play.Core.Tasks.Task task)
         {
             if (!task.IsSuccessful)
