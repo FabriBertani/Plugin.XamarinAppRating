@@ -43,7 +43,7 @@ namespace Plugin.XamarinAppRating
 
             Version version = new(0, 0);
 
-            if (Version.TryParse(info.OperatingSystem.ToString(), out var number))
+            if (Version.TryParse(info.OperatingSystemVersion.ToString(), out var number))
                 version = number;
 
             if (version >= new Version(10, 14))
