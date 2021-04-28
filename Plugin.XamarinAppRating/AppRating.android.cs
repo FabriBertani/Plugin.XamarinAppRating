@@ -5,10 +5,8 @@ using Android.Content;
 using Android.Content.PM;
 using Android.OS;
 using Android.Views;
-#if !MONODROID_80 || !MONODROID_81
 using Com.Google.Android.Play.Core.Review;
 using Com.Google.Android.Play.Core.Tasks;
-#endif
 using Xamarin.Essentials;
 using Task = System.Threading.Tasks.Task;
 
@@ -17,18 +15,12 @@ namespace Plugin.XamarinAppRating
     /// <summary>
     /// Implementation for AppRating
     /// </summary>
-//public static partial class AppRating
-#if !MONODROID_80 || !MONODROID_81
     public class AppRatingImplementation : Java.Lang.Object, IAppRating, IOnCompleteListener
-#else
-    public class AppRatingImplementation : Java.Lang.Object, IAppRating
-#endif
     {
         private static volatile Handler handler;
 
         private TaskCompletionSource<bool> inAppRateTCS;
 
-#if !MONODROID_80 || !MONODROID_81
         private IReviewManager reviewManager;
 
         private Com.Google.Android.Play.Core.Tasks.Task launchTask;
@@ -54,28 +46,12 @@ namespace Plugin.XamarinAppRating
 
             request.Dispose();
         }
-#else
-        /// <summary>
-        /// Open Android in-app review popup of your current application.
-        /// </summary>        
-        /// <remarks>This method is <b>not</b> supported on Android Oreo or below.</remarks>
-        public Task PerformInAppRateAsync()
-        {
-            var tcs = new TaskCompletionSource<bool>();
-
-            ShowAlertMessage("NOT SUPPORTED", "Your current Android version doesn't support in-app rating.");
-
-            tcs.SetResult(false);
-
-            return tcs.Task;
-        }
-#endif
 
         /// <summary>
         /// Perform rating on the current OS store app or open the store page on browser.
         /// </summary>
         /// <param name="packageName">Use this for Android.</param>
-        /// <param name="applicationId">Use this for iOS.</param>
+        /// <param name="applicationId">Use this for iOS/macOS/tvOS.</param>
         /// <param name="productId">Use this for UWP.</param>
         public Task PerformRatingOnStoreAsync(string packageName = "", string applicationId = "", string productId = "")
         {
@@ -89,7 +65,9 @@ namespace Plugin.XamarinAppRating
                 try
                 {
                     context.PackageManager.GetPackageInfo("com.android.vending", PackageInfoFlags.Activities);
-                    Intent intent = new Intent(Intent.ActionView, Android.Net.Uri.Parse(url));
+                    Intent intent = new(Intent.ActionView, Android.Net.Uri.Parse(url));
+
+                    intent.AddFlags(ActivityFlags.ClearTop);
 
                     intent.AddFlags(ActivityFlags.NewTask | ActivityFlags.ResetTaskIfNeeded);
 
@@ -155,8 +133,6 @@ namespace Plugin.XamarinAppRating
         {
             return Task.CompletedTask;
         }
-
-#if !MONODROID_80 || !MONODROID_81
         public void OnComplete(Com.Google.Android.Play.Core.Tasks.Task task)
         {
             if (!task.IsSuccessful)
@@ -168,15 +144,18 @@ namespace Plugin.XamarinAppRating
                 return;
             }
 
+            if (Platform.CurrentActivity == null)
+                throw new NullReferenceException("Please ensure that you have installed Xamarin.Essential package and that it's initialized on your MainActivity.cs");
+
             try
             {
-                var reviewInfo = (ReviewInfo)task.GetResult(Java.Lang.Class.FromType(typeof(ReviewInfo)));
+                ReviewInfo reviewInfo = (ReviewInfo)task.GetResult(Java.Lang.Class.FromType(typeof(ReviewInfo)));
 
                 launchTask = reviewManager.LaunchReviewFlow(Platform.CurrentActivity, reviewInfo);
 
                 launchTask.AddOnCompleteListener(this);
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
                 ShowAlertMessage("ERROR", "There was an error launching in-app review. Please try again.");
 
@@ -185,7 +164,6 @@ namespace Plugin.XamarinAppRating
                 System.Diagnostics.Debug.WriteLine(ex.Message);
             }
         }
-#endif
 
         private void ShowAlertMessage(string title, string message)
         {
@@ -198,7 +176,7 @@ namespace Plugin.XamarinAppRating
                 dialog.SetTitle(title);
                 dialog.SetMessage(message);
 
-                dialog.SetPositiveButton("OK", (System.EventHandler<DialogClickEventArgs>)null);
+                dialog.SetPositiveButton("OK", (EventHandler<DialogClickEventArgs>)null);
 
                 var alert = dialog.Create();
 
