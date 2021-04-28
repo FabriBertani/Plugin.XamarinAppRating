@@ -123,8 +123,8 @@
     <Reference Include="System.Numerics.Vectors" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Xamarin.Forms" Version="4.8.0.1534" />
-    <PackageReference Include="Xamarin.Essentials" Version="1.5.3.2" />
+    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2012" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.6.1" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
@@ -133,7 +133,7 @@
       <Name>Plugin.XamarinAppRating</Name>
     </ProjectReference>
     <ProjectReference Include="..\TestApp\TestApp.csproj">
-      <Project>{3FE865CF-95A3-4C96-B7AD-9CF630292B3A}</Project>
+      <Project>{A7C82D9C-2DD2-4285-9D5B-970AB8C41B8A}</Project>
       <Name>TestApp</Name>
     </ProjectReference>
   </ItemGroup>

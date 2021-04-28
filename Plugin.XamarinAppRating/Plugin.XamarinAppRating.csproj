@@ -1,6 +1,7 @@
 ﻿<Project Sdk="MSBuild.Sdk.Extras/2.0.54">
     <PropertyGroup>
-        <TargetFrameworks>netstandard2.0;Xamarin.iOS10;MonoAndroid80;MonoAndroid81;MonoAndroid90;MonoAndroid10.0</TargetFrameworks>
+        <TargetFrameworks></TargetFrameworks>
+        <TargetFrameworks>netstandard2.0;Xamarin.iOS10;MonoAndroid10.0;Xamarin.TVOS10;Xamarin.Mac20</TargetFrameworks>
         <TargetFrameworks Condition=" '$(OS)' == 'Windows_NT' ">$(TargetFrameworks);uap10.0.17763;</TargetFrameworks>
         
         <AssemblyName>Plugin.XamarinAppRating</AssemblyName>
@@ -47,21 +48,10 @@
         <DebugSymbols>true</DebugSymbols>
         <GenerateDocumentationFile>false</GenerateDocumentationFile>
     </PropertyGroup>
-    <PropertyGroup Condition=" '$(Configuration)'=='Debug' And '$(TargetFramework)' != 'MonoAndroid10.0' And '$(TargetFramework)' != 'MonoAndroid9.0' ">
-        <DebugSymbols>true</DebugSymbols>
-        <GenerateDocumentationFile>false</GenerateDocumentationFile>
-        <DefineConstants>MONODROID_80;MONODROID_81</DefineConstants>
-    </PropertyGroup>
     <PropertyGroup Condition=" '$(Configuration)'=='Release' ">
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
         <PublishRepositoryUrl>true</PublishRepositoryUrl>
-    </PropertyGroup>
-    <PropertyGroup Condition=" '$(Configuration)'=='Release' And '$(TargetFramework)' != 'MonoAndroid10.0' And '$(TargetFramework)' != 'MonoAndroid90' ">
-        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <GenerateDocumentationFile>true</GenerateDocumentationFile>
-        <PublishRepositoryUrl>true</PublishRepositoryUrl>
-        <DefineConstants>MONODROID_80;MONODROID_81</DefineConstants>
     </PropertyGroup>
     
     <ItemGroup>
@@ -82,12 +72,24 @@
     
     <ItemGroup Condition=" $(TargetFramework.StartsWith('MonoAndroid')) ">
         <Compile Include="**\*.android.cs" />
-        <PackageReference Condition="$(TargetFramework.StartsWith('MonoAndroid')) And '$(TargetFramework)' != 'MonoAndroid80' And '$(TargetFramework)' != 'MonoAndroid81'" Include="PlayCore" Version="1.8.0" />
+        <PackageReference Include="PlayCore" Version="1.10.0" />
         <PackageReference Include="Xamarin.Essentials" Version="1.5.3.2" />
     </ItemGroup>
     
     <ItemGroup Condition=" $(TargetFramework.StartsWith('Xamarin.iOS')) ">
-        <Compile Include="**\*.ios.cs" />
+        <Compile Include="**\*.ios.*.cs" />
+    </ItemGroup>
+
+    <ItemGroup Condition=" $(TargetFramework.StartsWith('Xamarin.TVOS')) ">
+        <Compile Include="**\*.tvos.*.cs" />
+    </ItemGroup>
+
+    <ItemGroup Condition=" $(TargetFramework.StartsWith('Xamarin.Mac20')) ">
+        <Compile Include="**\*.macos.cs" />
+    </ItemGroup>
+    
+    <ItemGroup>
+      <PackageReference Include="Xamarin.Essentials" Version="1.6.1" />
     </ItemGroup>
     
 </Project>

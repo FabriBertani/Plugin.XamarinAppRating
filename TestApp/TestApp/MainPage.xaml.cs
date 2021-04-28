@@ -69,7 +69,7 @@ namespace TestApp
 
         private void InAppRating_Clicked(object sender, EventArgs e)
         {
-            if (!Preferences.Get("application_rated", false))
+            //if (!Preferences.Get("application_rated", false))
                 Task.Run(() => RateApplicationInApp());
         }
 

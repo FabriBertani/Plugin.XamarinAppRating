@@ -1,16 +1,21 @@
 ﻿using Android.App;
 using Android.Content.PM;
 using Android.OS;
-using Android.Support.V7.App;
 using Android.Views;
 using Android.Widget;
+using AndroidX.AppCompat.App;
 using Plugin.XamarinAppRating;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
 
 namespace TestAppNative.Android
 {
-    [Activity(Label = "TestAppNative", Icon = "@mipmap/ic_launcher", Theme = "@style/AppTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation | ConfigChanges.UiMode | ConfigChanges.ScreenLayout | ConfigChanges.SmallestScreenSize)]
+    [Activity(
+        Label = "TestAppNative",
+        Icon = "@mipmap/ic_launcher",
+        Theme = "@style/AppTheme",
+        MainLauncher = true,
+        ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation | ConfigChanges.UiMode | ConfigChanges.ScreenLayout | ConfigChanges.SmallestScreenSize)]
     public class MainActivity : AppCompatActivity, View.IOnClickListener
     {
         private Button rateAppOnStoreBtn;
