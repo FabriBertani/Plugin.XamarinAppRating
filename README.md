@@ -114,7 +114,7 @@ if (CrossAppRating.IsSupported)
 ```
 
 ## Usage
-> :warning: **Warning** - You should be careful about **how and when** you ask users to rate your app, there may be penalties from stores. As advice I recommend to use a counter on the app start and storage that count, then when the counter reachs certain number, display a dialog asking to the users if they want to rate the app, if they decline the offer, reset the counter to ask them later, also leave the option to do it themselves.
+> :warning: **Warning** - You should be careful about **how and when** you ask users to rate your app, there may be penalties from stores. As advice, I recommend using a counter on the app start and storage that count, then when the counter reaches certain number, display a dialog asking the users if they want to rate the app, if they decline the offer, reset the counter to ask them later, also leave the option to do it themselves. 
 
 ```csharp
 public partial class MainPage : ContentPage
