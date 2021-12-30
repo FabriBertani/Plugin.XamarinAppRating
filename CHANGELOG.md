@@ -6,7 +6,7 @@
 - Updated libraries.
 
 **Fixed bugs:**
-- Fixed crash on Android when trying to open an error popup.
+- Fixed Android crash when trying to open a popup.
 
 ## 1.2.0 (04/28/2021)
 [Full Changelog](https://github.com/FabriBertani/Plugin.XamarinAppRating/compare/v1.1.0...v1.2.0)
