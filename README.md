@@ -27,7 +27,7 @@ Plugin.XamarinAppRating is available via NuGet, grab the latest package and inst
 - Merged android support into a simple solution to avoid OS version limitations.
 
 ## API Usage
-Call `CrossAppRating.Current` from any project to gain access to APIs.
+Call `CrossAppRating.Current` from any project to gain access to the APIs.
 
 There are two main methods, `PerformInAppRateAsync` and `PerformRatingOnStoreAsync`.
 
@@ -38,7 +38,7 @@ There are two main methods, `PerformInAppRateAsync` and `PerformRatingOnStoreAsy
 /// </summary>
 public Task PerformInAppRateAsync();
 ```
-> This method will open in-app review dialog, using the `packageName` declared on the `AndroidManifest` file.
+> This method will open an in-app review dialog, using the `packageName` declared on the `AndroidManifest` file.
 
 ```csharp
 /// <summary>
@@ -46,11 +46,11 @@ public Task PerformInAppRateAsync();
 /// </summary>
 public Task PerformRatingOnStoreAsync()
 ```
-> This method will open **_Google Play app_** on the store page of your current application. Otherwise it will try to open the store page on browser.
+> This method will open **_Google Play app_** on the store page of your current application. Otherwise, it will try to open the store page on the browser.
 
-If neither store page nor browser store page works, it will display an alert announcing the error.
+If neither the store page nor the browser store page works, it will display an alert announcing the error.
 
-`packageName` **must** be provided as named argument to open the store page on store app or browser.
+`packageName` **must** be provided as a named argument to open the store page on the store app or browser.
 
 #### Example
 ```csharp
@@ -65,7 +65,7 @@ if (CrossAppRating.IsSupported)
 /// </summary>
 public Task PerformInAppRateAsync();
 ```
-> **For iOS**: if the device current OS version is 10.3 or newer, this method will raise an in-app review popup of your current application, otherwise it will display an alert announcing that it's not supported.
+> **For iOS**: if the device current OS version is 10.3 or newer, this method will raise an in-app review popup of your current application, otherwise, it will display an alert announcing that it's not supported.
 
 ```csharp
 /// <summary>
@@ -73,11 +73,11 @@ public Task PerformInAppRateAsync();
 /// </summary>
 public Task PerformRatingOnStoreAsync()
 ```
-> This method will open **App Store app** on the store page of your current application. Otherwise it will try to open the store page on browser.
+> This method will open **App Store app** on the store page of your current application. Otherwise, it will try to open the store page on the browser.
 
 If the method fails, it will display an alert announcing the error.
 
-`applicationId` property is the **_StoreId_** of your app and it **must** be provided as named argument to open the store page on store app or browser.
+`applicationId` property is the **_StoreId_** of your app and it **must** be provided as a named argument to open the store page on the store app or browser.
 
 #### Example
 ```csharp
@@ -92,7 +92,7 @@ if (CrossAppRating.IsSupported)
 /// </summary>
 public Task PerformInAppRateAsync();
 ```
-> **If the target version build is 17763 or above**, this method will raise an in-app review dialog of your current application, otherwise it will display an alert announcing that it's not supported.
+> **If the target version build is 17763 or above**, this method will raise an in-app review dialog of your current application, otherwise, it will display an alert announcing that it's not supported.
 
 
 ```csharp
@@ -103,9 +103,9 @@ public Task PerformRatingOnStoreAsync()
 ```
 > This method will open **_Microsoft Store application_** with the page of your current app.
 
-If method fail it will display an alert announcing the error.
+If the method fails it will display an alert announcing the error.
 
-`productId` is the **_ProductId_** of your UWP app and it **must** be provided as named argument to open the store page app.
+`productId` is the **_ProductId_** of your UWP app and it **must** be provided as a named argument to open the store page app.
 
 ### Example
 ```csharp
@@ -114,7 +114,7 @@ if (CrossAppRating.IsSupported)
 ```
 
 ## Usage
-> :warning: **Warning** - You should be careful about **how and when** you ask users to rate your app, there may be penalties from stores. As advice, I recommend using a counter on the app start and storage that count, then when the counter reaches certain number, display a dialog asking the users if they want to rate the app, if they decline the offer, reset the counter to ask them later, also leave the option to do it themselves. 
+> :warning: **Warning** - You should be careful about **how and when** you ask users to rate your app, there may be penalties from stores. As for advice, I recommend using a counter on the app start and storage that count, then when the counter reaches a certain number, display a dialog asking the users if they want to rate the app, if they decline the offer, reset the counter to ask them later, also leave the option to do it themselves. 
 
 ```csharp
 public partial class MainPage : ContentPage
@@ -193,7 +193,7 @@ public partial class MainPage : ContentPage
 ```
 
 ## Samples
-Take a look into the [TestApp sample](https://github.com/FabriBertani/Plugin.XamarinAppRating/tree/main/TestApp) for **Xamarin.Forms** or [TestAppNative sample](https://github.com/FabriBertani/Plugin.XamarinAppRating/tree/main/TestAppNative) for **Xamarin native** fully detailed implementation of this plugin.
+Take a look at the [TestApp sample](https://github.com/FabriBertani/Plugin.XamarinAppRating/tree/main/TestApp) for **Xamarin.Forms** or [TestAppNative sample](https://github.com/FabriBertani/Plugin.XamarinAppRating/tree/main/TestAppNative) for **Xamarin native** fully detailed implementation of this plugin.
 
 ## Contributions
 Please, feel free to open an [Issue](https://github.com/FabriBertani/Plugin.XamarinAppRating/issues) if you found any bugs or submit a PR.

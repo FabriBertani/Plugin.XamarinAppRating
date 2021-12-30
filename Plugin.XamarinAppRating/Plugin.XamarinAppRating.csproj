@@ -9,10 +9,10 @@
         <PackageId>Plugin.XamarinAppRating</PackageId>
         
         <Product>$(AssemblyName) ($(TargetFramework))</Product>
-        <AssemblyVersion>1.2.0</AssemblyVersion>
-        <AssemblyFileVersion>1.2.0</AssemblyFileVersion>
-        <Version>1.2.0</Version>
-        <PackageVersion>1.2.0</PackageVersion>
+        <AssemblyVersion>1.2.1</AssemblyVersion>
+        <AssemblyFileVersion>1.2.1</AssemblyFileVersion>
+        <Version>1.2.1</Version>
+        <PackageVersion>1.2.1</PackageVersion>
         <PackOnBuild>true</PackOnBuild>
         <NeutralLanguage>en</NeutralLanguage>
         
@@ -73,7 +73,7 @@
     <ItemGroup Condition=" $(TargetFramework.StartsWith('MonoAndroid')) ">
         <Compile Include="**\*.android.cs" />
         <PackageReference Include="PlayCore" Version="1.10.0" />
-        <PackageReference Include="Xamarin.Essentials" Version="1.5.3.2" />
+        <PackageReference Include="Xamarin.Essentials" Version="1.6.1" />
     </ItemGroup>
     
     <ItemGroup Condition=" $(TargetFramework.StartsWith('Xamarin.iOS')) ">

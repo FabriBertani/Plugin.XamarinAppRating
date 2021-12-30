@@ -146,7 +146,7 @@ namespace Plugin.XamarinAppRating
 
             handler.Post(() =>
             {
-                var dialog = new AlertDialog.Builder(Application.Context);
+                var dialog = new AlertDialog.Builder(Platform.CurrentActivity);
                 dialog.SetTitle(title);
                 dialog.SetMessage(message);
 

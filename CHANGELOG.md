@@ -1,4 +1,13 @@
 # Changelog
+## 1.2.1 (12/30/2021)
+[Full Changelog](https://github.com/FabriBertani/Plugin.XamarinAppRating/compare/v1.2.0...v1.2.1)
+
+**Implemented enhancements:**
+- Updated libraries.
+
+**Fixed bugs:**
+- Fixed Android crash when trying to open a popup.
+
 ## 1.2.0 (04/28/2021)
 [Full Changelog](https://github.com/FabriBertani/Plugin.XamarinAppRating/compare/v1.1.0...v1.2.0)
 
