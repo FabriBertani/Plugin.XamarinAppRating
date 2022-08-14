@@ -1,10 +1,10 @@
 # Plugin.XamarinAppRating
 [![NuGet](https://img.shields.io/nuget/v/Plugin.XamarinAppRating.svg?label=NuGet)](https://www.nuget.org/packages/Plugin.XamarinAppRating/)
 
-Plugin.XamarinAppRating gives developers a fast and easy way to ask users to rate the app on the stores.
+Plugin.XamarinAppRating gives developers a fast and easy way to ask users to rate the app in the stores.
 
 ## Installation
-Plugin.XamarinAppRating is available via NuGet, grab the latest package and install in your solution:
+Plugin.XamarinAppRating is available via NuGet, grab the latest package and install it in your solution:
 
     Install-Package Plugin.XamarinAppRating
 
@@ -19,9 +19,6 @@ Plugin.XamarinAppRating is available via NuGet, grab the latest package and inst
 |UWP|Build 17763+|
 
 ## Version 1.2.0
-> :warning: `PerformPlatformRateAppAsync` was removed, please use new methods `PerformInAppRateAsync` or `PerformRatingOnStoreAsync`.
-
-
 ### New Features
 - Added support to macOS and tvOS :exclamation:
 - Merged android support into a simple solution to avoid OS version limitations.
@@ -65,7 +62,7 @@ if (CrossAppRating.IsSupported)
 /// </summary>
 public Task PerformInAppRateAsync();
 ```
-> **For iOS**: if the device current OS version is 10.3 or newer, this method will raise an in-app review popup of your current application, otherwise, it will display an alert announcing that it's not supported.
+> **For iOS**: if the device's current OS version is 10.3 or newer, this method will raise an in-app review popup of your current application, otherwise, it will display an alert announcing that it's not supported.
 
 ```csharp
 /// <summary>
