@@ -1,4 +1,13 @@
 # Changelog
+## 1.2.2 (04/16/2023)
+[Full Changelog](https://github.com/FabriBertani/Plugin.XamarinAppRating/compare/v1.2.1...v.1.2.2)
+
+**Implemented enhancements:**
+- Updated libraries.
+
+**Fixed bugs:**
+- Fixed [#2](https://github.com/FabriBertani/Plugin.XamarinAppRating/issues/2).
+
 ## 1.2.1 (12/30/2021)
 [Full Changelog](https://github.com/FabriBertani/Plugin.XamarinAppRating/compare/v1.2.0...v1.2.1)
 

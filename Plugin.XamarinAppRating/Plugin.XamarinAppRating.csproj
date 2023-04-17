@@ -1,18 +1,18 @@
 ﻿<Project Sdk="MSBuild.Sdk.Extras/2.0.54">
     <PropertyGroup>
         <TargetFrameworks></TargetFrameworks>
-        <TargetFrameworks>netstandard2.0;Xamarin.iOS10;MonoAndroid10.0;Xamarin.TVOS10;Xamarin.Mac20</TargetFrameworks>
-        <TargetFrameworks Condition=" '$(OS)' == 'Windows_NT' ">$(TargetFrameworks);uap10.0.17763;</TargetFrameworks>
+        <TargetFrameworks>netstandard2.0;Xamarin.iOS10;MonoAndroid12.0;Xamarin.TVOS10;Xamarin.Mac20</TargetFrameworks>
+        <TargetFrameworks Condition=" '$(OS)' == 'Windows_NT' ">$(TargetFrameworks);uap10.0.18362;</TargetFrameworks>
         
         <AssemblyName>Plugin.XamarinAppRating</AssemblyName>
         <RootNamespace>Plugin.XamarinAppRating</RootNamespace>
         <PackageId>Plugin.XamarinAppRating</PackageId>
         
         <Product>$(AssemblyName) ($(TargetFramework))</Product>
-        <AssemblyVersion>1.2.1</AssemblyVersion>
-        <AssemblyFileVersion>1.2.1</AssemblyFileVersion>
-        <Version>1.2.1</Version>
-        <PackageVersion>1.2.1</PackageVersion>
+        <AssemblyVersion>1.2.2</AssemblyVersion>
+        <AssemblyFileVersion>1.2.2</AssemblyFileVersion>
+        <Version>1.2.2</Version>
+        <PackageVersion>1.2.2</PackageVersion>
         <PackOnBuild>true</PackOnBuild>
         <NeutralLanguage>en</NeutralLanguage>
         
@@ -37,11 +37,13 @@
         
         <Authors>FabriBertani</Authors>
         <Owners>FabriBertani</Owners>
-        <Copyright>Copyright 2021 Fabricio Bertani</Copyright>
+        <Copyright>Copyright 2023 Fabricio Bertani</Copyright>
         
         <Configurations>Debug;Release</Configurations>
 
         <DisableExtraReferences>true</DisableExtraReferences>
+
+        <PackageReadmeFile>README.md</PackageReadmeFile>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)'=='Debug' ">
@@ -57,6 +59,10 @@
     <ItemGroup>
         <None Include="..\LICENSE" PackagePath="" Pack="true" />
         <None Include="..\Assets\plugin.xamarinapprating_128x128.png" PackagePath="icon.png" Pack="true" />
+        <None Include="..\README.md">
+          <Pack>True</Pack>
+          <PackagePath>\</PackagePath>
+        </None>
         <Compile Include="**\*.shared.cs" />
     </ItemGroup>
 
@@ -65,15 +71,15 @@
     
     <ItemGroup Condition=" $(TargetFramework.StartsWith('uap10.0')) ">
         <Compile Include="**\*.uwp.cs" />
-        <SDKReference Include="WindowsMobile, Version=10.0.17763.0">
+        <SDKReference Include="WindowsMobile, Version=10.0.18362.0">
             <Name>Windows Mobile Extensions for the UWP</Name>
         </SDKReference>
     </ItemGroup>
     
     <ItemGroup Condition=" $(TargetFramework.StartsWith('MonoAndroid')) ">
         <Compile Include="**\*.android.cs" />
-        <PackageReference Include="PlayCore" Version="1.10.0" />
-        <PackageReference Include="Xamarin.Essentials" Version="1.6.1" />
+        <PackageReference Include="Xamarin.Google.Android.Play.Core" Version="1.10.3.4" />
+        <PackageReference Include="Xamarin.Essentials" Version="1.7.5" />
     </ItemGroup>
     
     <ItemGroup Condition=" $(TargetFramework.StartsWith('Xamarin.iOS')) ">
@@ -89,7 +95,7 @@
     </ItemGroup>
     
     <ItemGroup>
-      <PackageReference Include="Xamarin.Essentials" Version="1.6.1" />
+      <PackageReference Include="Xamarin.Essentials" Version="1.7.5" />
     </ItemGroup>
     
 </Project>

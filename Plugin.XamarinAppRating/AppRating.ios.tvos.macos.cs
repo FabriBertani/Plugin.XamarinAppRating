@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Foundation;
 using StoreKit;
@@ -28,6 +29,22 @@ namespace Plugin.XamarinAppRating
 #elif __IOS__
             if (UIDevice.CurrentDevice.CheckSystemVersion(10, 3))
             {
+                if (UIDevice.CurrentDevice.CheckSystemVersion(10, 4))
+                {
+                    var windowScene = UIApplication.SharedApplication.ConnectedScenes
+                        .ToArray<UIScene>()
+                        .FirstOrDefault(ws => ws.ActivationState == UISceneActivationState.ForegroundActive) as UIWindowScene;
+
+                    if (windowScene != null)
+                    {
+                        SKStoreReviewController.RequestReview(windowScene);
+
+                        tcs.SetResult(true);
+
+                        return tcs.Task;
+                    }
+                }
+
                 SKStoreReviewController.RequestReview();
 
                 tcs.SetResult(true);
@@ -41,12 +58,7 @@ namespace Plugin.XamarinAppRating
 #elif __MACOS__
             using var info = new NSProcessInfo();
 
-            Version version = new(0, 0);
-
-            if (Version.TryParse(info.OperatingSystemVersion.ToString(), out var number))
-                version = number;
-
-            if (version >= new Version(10, 14))
+            if (ParseVersion(info.OperatingSystemVersion.ToString()) >= new Version(10, 14))
             {
                 SKStoreReviewController.RequestReview();
 
@@ -77,11 +89,11 @@ namespace Plugin.XamarinAppRating
             {
                 var url = string.Empty;
 #if __IOS__
-                url = $"itms-apps://itunes.apple.com/app/{applicationId}?action=write-review";
+                url = $"itms-apps://itunes.apple.com/app/id{applicationId}?action=write-review";
 #elif __TVOS__
-                url = $"com.apple.TVAppStore://itunes.apple.com/app/{applicationId}?action=write-review";
+                url = $"com.apple.TVAppStore://itunes.apple.com/app/id{applicationId}?action=write-review";
 #elif __MACOS__
-                url = $"macappstore://itunes.apple.com/app/{applicationId}?action=write-review";
+                url = $"macappstore://itunes.apple.com/app/id{applicationId}?action=write-review";
 #endif
 
                 try
@@ -140,6 +152,17 @@ namespace Plugin.XamarinAppRating
                 alert.RunModal();
 # endif
             });
+        }
+
+        internal static Version ParseVersion(string version)
+        {
+            if (Version.TryParse(version, out var number))
+                return number;
+
+            if (int.TryParse(version, out var major))
+                return new Version(major, 0);
+
+            return new Version(0, 0);
         }
     }
 }

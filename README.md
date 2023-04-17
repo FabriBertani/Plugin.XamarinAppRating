@@ -16,12 +16,12 @@ Plugin.XamarinAppRating is available via NuGet, grab the latest package and inst
 |Xamarin.iOS|iOS 9.0+|
 |Xamarin.tvOS|All|
 |Xamarin.macOS|All|
-|UWP|Build 17763+|
+|UWP|Build 18362+|
 
-## Version 1.2.0
+## Version 1.2.2
 ### New Features
 - Added support to macOS and tvOS :exclamation:
-- Merged android support into a simple solution to avoid OS version limitations.
+- Bug fixes and improvement.
 
 ## API Usage
 Call `CrossAppRating.Current` from any project to gain access to the APIs.

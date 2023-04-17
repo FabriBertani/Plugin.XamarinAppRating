@@ -5,9 +5,9 @@ using Android.Content;
 using Android.Content.PM;
 using Android.OS;
 using Android.Views;
-using Com.Google.Android.Play.Core.Review;
-using Com.Google.Android.Play.Core.Tasks;
 using Xamarin.Essentials;
+using Xamarin.Google.Android.Play.Core.Review;
+using Xamarin.Google.Android.Play.Core.Tasks;
 using Task = System.Threading.Tasks.Task;
 
 namespace Plugin.XamarinAppRating
@@ -23,7 +23,9 @@ namespace Plugin.XamarinAppRating
 
         private IReviewManager reviewManager;
 
-        private Com.Google.Android.Play.Core.Tasks.Task launchTask;
+        private Xamarin.Google.Android.Play.Core.Tasks.Task launchTask;
+
+        private bool forceReturn;
 
         /// <summary>
         /// Open Android in-app review popup of your current application.
@@ -35,6 +37,8 @@ namespace Plugin.XamarinAppRating
             inAppRateTCS = new TaskCompletionSource<bool>();
 
             reviewManager = ReviewManagerFactory.Create(Application.Context);
+
+            forceReturn = false;
 
             var request = reviewManager.RequestReviewFlow();
 
@@ -60,15 +64,18 @@ namespace Plugin.XamarinAppRating
             if (!string.IsNullOrEmpty(packageName))
             {
                 var context = Application.Context;
-                var url = $"market://details?id={(context as Context)?.PackageName}";
+                var url = $"market://details?id={packageName}";
 
                 try
                 {
-                    context.PackageManager.GetPackageInfo("com.android.vending", PackageInfoFlags.Activities);
+                    var currentActivity = Platform.CurrentActivity;
+
+                    var versionedPackage = new VersionedPackage(currentActivity.PackageName, 0);
+                    
+                    var info = currentActivity.PackageManager.GetPackageInfo(versionedPackage, PackageInfoFlags.Activities);
+
                     Intent intent = new(Intent.ActionView, Android.Net.Uri.Parse(url));
-
                     intent.AddFlags(ActivityFlags.ClearTop);
-
                     intent.AddFlags(ActivityFlags.NewTask | ActivityFlags.ResetTaskIfNeeded);
 
                     context.StartActivity(intent);
@@ -107,11 +114,11 @@ namespace Plugin.XamarinAppRating
             return tcs.Task;
         }
 
-        public void OnComplete(Com.Google.Android.Play.Core.Tasks.Task task)
+        public void OnComplete(Xamarin.Google.Android.Play.Core.Tasks.Task task)
         {
-            if (!task.IsSuccessful)
+            if (!task.IsSuccessful | forceReturn)
             {
-                inAppRateTCS.TrySetResult(false);
+                inAppRateTCS.TrySetResult(forceReturn);
 
                 launchTask?.Dispose();
 
@@ -125,6 +132,8 @@ namespace Plugin.XamarinAppRating
             {
                 ReviewInfo reviewInfo = (ReviewInfo)task.GetResult(Java.Lang.Class.FromType(typeof(ReviewInfo)));
 
+                forceReturn = true;
+
                 launchTask = reviewManager.LaunchReviewFlow(Platform.CurrentActivity, reviewInfo);
 
                 launchTask.AddOnCompleteListener(this);
@@ -135,7 +144,8 @@ namespace Plugin.XamarinAppRating
 
                 inAppRateTCS.TrySetResult(false);
 
-                System.Diagnostics.Debug.WriteLine(ex.Message);
+                System.Diagnostics.Debug.WriteLine($"Error message: {ex.Message}");
+                System.Diagnostics.Debug.WriteLine($"Stacktrace: {ex}");
             }
         }
 
