@@ -1,7 +1,13 @@
-# Plugin.XamarinAppRating
+# Plugin.XamarinAppRating (deprecated)
 [![NuGet](https://img.shields.io/nuget/v/Plugin.XamarinAppRating.svg?label=NuGet)](https://www.nuget.org/packages/Plugin.XamarinAppRating/)
 
 Plugin.XamarinAppRating gives developers a fast and easy way to ask users to rate the app in the stores.
+
+## :warning:  WARNING  :warning:
+### Package Deprecated
+As [Xamarin.Forms is no longer maintained by Microsoft since May 1, 2024](https://dotnet.microsoft.com/en-us/platform/support/policy/xamarin), this package is now officially deprecated.
+
+Please see [Plugin.Maui.AppRating](https://github.com/FabriBertani/Plugin.Maui.AppRating) that uses the latest version with .Net Maui.
 
 ## Installation
 Plugin.XamarinAppRating is available via NuGet, grab the latest package and install it in your solution:
